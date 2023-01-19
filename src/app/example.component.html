@@ -1,0 +1,61 @@
+<p>
+  1. Update
+  <nx-link>
+    <a
+      href="https://stackblitz.com/edit/aquila-issue?file=package.json"
+      target="_top"
+      >package.json</a
+    >
+  </nx-link>
+  with the versions you use
+</p>
+<p>2. Please reproduce your issue here</p>
+
+<form [formGroup]="dateFormGroup">
+  <nx-formfield nxLabel="Start date" class="nx-margin-y-3xs">
+    <input
+      #formatDatefield="nxDatefield"
+      nxDatefield
+      nxInput
+      [nxDatepicker]="startDatepicker"
+      formControlName="startDate"
+      (dateChange)="updateEndDatepicker()"
+      [nxParseFormat]="['YYYY/MM/DD', 'YYYY/MM/DD']"
+      nxDisplayFormat="YYYY/MM/DD"
+      nxStrict="true"
+    />
+    <span nxFormfieldHint i18n="@@cn-configuration-card.date-hint"
+      >YYYY/MM/DD</span
+    >
+    <nx-datepicker-toggle
+      [for]="startDatepicker"
+      nxFormfieldSuffix
+    ></nx-datepicker-toggle>
+    <nx-datepicker #startDatepicker></nx-datepicker>
+  </nx-formfield>
+
+  <nx-formfield nxLabel="End date" class="nx-margin-y-3xs">
+    <input
+      nxDatefield
+      nxInput
+      [nxDatepicker]="endDatepicker"
+      formControlName="endDate"
+      [nxParseFormat]="['YYYY/MM/DD', 'YYYY/MM/DD']"
+      nxDisplayFormat="YYYY/MM/DD"
+      [nxMin]="dateFormGroup.value.startDate"
+    />
+    <span nxFormfieldHint i18n="@@cn-configuration-card.date-hint"
+      >YYYY/MM/DD</span
+    >
+    <nx-datepicker-toggle
+      [for]="endDatepicker"
+      nxFormfieldSuffix
+    ></nx-datepicker-toggle>
+    <nx-datepicker #endDatepicker></nx-datepicker>
+  </nx-formfield>
+  <code
+    >Start date: {{ dateFormGroup.value.startDate | date: 'yyyy/MM/dd' }}</code
+  >
+  <br />
+  <code>End date: {{ dateFormGroup.value.endDate | date: 'yyyy/MM/dd' }}</code>
+</form>
